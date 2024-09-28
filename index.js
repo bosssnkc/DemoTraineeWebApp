@@ -59,7 +59,7 @@ app.post('/login', async (req, res) => {
         const [rows] = await connection.execute('SELECT * FROM users WHERE username = ?', [username]);
 
         if (rows.length === 0) {
-            return res.render('login', { message: 'username หรือ password ไม่ถูกต้อง'});
+            return res.render('login', { message: 'ไม่พบชื่อผู้ใช้นี้ในระบบ'});
         }
 
         const user = rows[0];
@@ -80,8 +80,8 @@ app.post('/login', async (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-    req.session.destroy((e) => {
-        if (e) {
+    req.session.destroy((logouted) => {
+        if (logouted) {
             return res.redirect('/profile');
         }
         res.clearCookie('connect.sid');
@@ -118,5 +118,5 @@ app.post("/register", async (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`Server ONLINE on port ${port}`)
+    console.log(`Server is ONLINE on port ${port}`)
 });
