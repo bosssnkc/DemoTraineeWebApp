@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <script>
+        function logout() {
+            fetch('/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => {
+                    if (response.ok) {
+                        alert("Logout เรียบร้อย");
+                        window.location.href = '/';
+                    } else {
+                        alert('Logout failed');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <nav>
+        <ul class="nav_home">
+            <li><a href="/">Home</a></li>
+        </ul>
+        <ul class="topbar_nav">
+            <li><a href="javascript:void(0);" onclick="logout()">Logout</a></li>
+        </ul>
+    </nav>
+    <section>
+        <div class="profile-container">
+            <h1>ยินดีต้อนรับคุณ <%= user.username %>!</h1>
+            <img src="/images/profile.png" alt="profile_icon">
+            <div class="profile-detail">
+                <p>ชื่อจริง: <%= user.firstname %>
+                </p>
+                <p>นามสกุล: <%= user.lastname %>
+                </p>
+                <p>e-mail: <%= user.email %>
+                </p>
+                <p>อายุ: <%= user.age %>
+                </p>
+                <p>เพศ:
+                    <% if (user.gender===0) { %>
+                        ชาย
+                        <% } else if (user.gender===1) { %>
+                            หญิง
+                            <% } else { %>
+                                อื่นๆ
+                                <% } %>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>Author: Wittaya Sukchouy</p>
+    </footer>
+
+</body>
+
+</html>

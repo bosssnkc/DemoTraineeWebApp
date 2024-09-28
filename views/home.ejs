@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Demo Test Application</title>
+    <script>
+        function logout() {
+            fetch('/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Logout เรียบร้อย");
+                    window.location.href = '/';
+                } else {
+                    alert('Logout failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <nav>
+        <ul class="nav_home">
+            <li><a href="/">Home</a></li>
+        </ul>
+        <% if (user) { %>
+            <ul class="topbar_nav">
+                <li><a href="/profile">Profile</a></li>
+                <li><a href="javascript:void(0);" onclick="logout()">Logout</a></li>
+            </ul>
+        <% } else { %>
+            <ul class="topbar_nav">
+                <li><a href="/login">เข้าสู่ระบบ</a></li>
+                <li><a href="/register">ลงทะเบียน</a></li>
+            </ul>
+        <% } %>
+    </nav>
+    <section>
+        <div class="home-container">
+            <div class="welcome-container">
+                <h1>ยินดีต้อนรับ</h1><br>
+                <p>ยินดีต้อนรับเข้าสู่ Demo Test Web Application หากยังไม่มีบัญชีผู้ใช้สามารถสร้างได้โดยการกด "สมัครสมาชิก" หรีอหากท่านมีบัญชีผู้ใช้แล้วสามารถ "เข้าสู่ระบบ" ได้ทันที</p>
+            </div>
+            <% if (user) { %>
+                <a href="/profile">Profile</a>
+                <a href="javascript:void(0);" onclick="logout()">Logout</a>
+            <%} else {%>
+                <a href="/register">ลงทะเบียน</a>
+                <a href="/login">เข้าสู่ระบบ</a>
+            <%} %>
+            
+        </div>
+    </section>
+
+    <footer>
+        <p>Author: Wittaya Sukchouy</p>
+    </footer>
+</body>
+
+</html>

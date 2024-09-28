@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style2.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        input {
+            border-bottom: 2px solid #ccc;
+            /* Default border color */
+        }
+
+        input.valid {
+            border-bottom: 2px solid green;
+        }
+
+        input.invalid {
+            border-bottom: 2px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul class="nav_home">
+            <li><a href="/">Home</a></li>
+        </ul>
+        <ul class="topbar_nav">
+            <li><a href="login">เข้าสู่ระบบ</a></li>
+            <li><a href="#">ลงทะเบียน</a></li>
+        </ul>
+    </nav>
+    <section>
+        <h1>Register</h1>
+        <form class="form-container" id="registerForm" action="/register" method="POST">
+            <div class="step active" id="step1">
+                <h2>Step 1: ชื่อผู้ใช้ และ อีเมล์</h2>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="username" required><br>
+                <p id="usernameError" style="color: red; display: none;">รูปแบบ username ไม่ถูกต้อง กรุณาใช้ a-Z 0-9
+                    เท่านั้น</p>
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="example@email.com" required><br>
+                <p id="emailError" style="color: red; display: none;">รูปแบบอีเมลไม่ถูกต้อง</p>
+                <button type="button" onclick="validateUsernameAndEmail()" class="next">Next</button>
+            </div>
+
+            <div class="step" id="step2">
+                <h2>Step 2: รหัสผ่าน</h2>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required><br>
+
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" required><br>
+                <p id="passwordError" style="color: red; display: none;">รหัสผ่านไม่ตรงกัน</p>
+
+                <button type="button" onclick="prevStep(1)" class="back">Previous</button>
+                <button type="button" onclick="validatePassword()" class="next">Next</button>
+            </div>
+
+            <div class="step" id="step3">
+                <h2>Step 3: ข้อมูลส่วนตัว</h2>
+                <label for="firstname">ชื่อต้น</label>
+                <input type="text" id="firstname" name="firstname" placeholder="firstname" required><br>
+                <label for="lastname">นามสกุล</label>
+                <input type="text" id="lastname" name="lastname" placeholder="lastname" required><br>
+                <label for="age">อายุ</label>
+                <input type="number" id="age" name="age" required><br>
+                <label for="gender">เพศ</label>
+                <select id="gender" name="gender" required>
+                    <option value="Male">ชาย</option>
+                    <option value="Female">หญิง</option>
+                    <option value="Other">อื่นๆ</option>
+                </select><br>
+                <button type="button" onclick="prevStep(2)" class="back">Previous</button>
+                <button type="submit" class="next">Submit</button>
+            </div>
+        </form>
+    </section>
+
+    <% if (errorMessage) { %>
+        <script>
+            alert("<%= errorMessage %>");
+        </script>
+        <% } %>
+
+            <% if (redirect) { %>
+                <script>
+                    alert("สมัครสมาชิกเรียบร้อยจะเข้าสู่หน้าเข้าสู่ระบบภายใน 3 วินาที")
+                    setTimeout(function () {
+                        window.location.href = '/login';
+                    }, 3000);
+                </script>
+                <% } %>
+
+                    <script src="register.js">
+                    </script>
+                    <footer>
+                        <p>Author: Wittaya Sukchouy</p>
+                    </footer>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/style2.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Web Application | Login</title>
+</head>
+
+<body>
+    <nav>
+        <ul class="nav_home">
+            <li><a href="/">Home</a></li>
+        </ul>
+        <ul class="topbar_nav">
+            <li><a href="#">เข้าสู่ระบบ</a></li>
+            <li><a href="register">ลงทะเบียน</a></li>
+        </ul>
+    </nav>
+    <section>
+        <h1>เข้าสู่ระบบ</h1>
+        <div>
+            <form action="/login" method="POST" class="form-container">
+                <div class="login-form">
+                    <label for="username">username</label>
+                    <input type="text" name="username" id="usernameController" placeholder="username1234"><br>
+
+                    <label for="password">password</label>
+                    <input type="password" name="password" id="passwordController" placeholder="********"><br>
+                    <a href="/register">สมัครสมาชิก</a>
+                </div>
+                <button type="submit" name="loginButton" value="login" class="next">Login</button>
+            </form>
+        </div>
+    </section>
+    <footer>
+        <p>Author: Wittaya Sukchouy</p>
+    </footer>
+    <script>
+        const message = "<%= message %>";
+        if (message) {
+            alert(message);
+        }
+    </script>
+</body>
+
+</html>
